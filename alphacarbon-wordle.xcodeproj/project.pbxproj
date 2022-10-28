@@ -1,0 +1,503 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F2BE2FBE2C78C475043C0EF /* Pods_alphacarbon_wordle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */; };
+		3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57728A3AE9C00651FEE /* WebViewModel.swift */; };
+		3397B57C28A510BD00651FEE /* WorldleFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57B28A510BD00651FEE /* WorldleFieldView.swift */; };
+		3397B57E28A5FACC00651FEE /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57D28A5FACC00651FEE /* FieldModel.swift */; };
+		3397B58028A5FD8C00651FEE /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57F28A5FD8C00651FEE /* Square.swift */; };
+		339B7D6A289D13850057A31E /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D69289D13850057A31E /* TabbarView.swift */; };
+		339B7D6C289D14390057A31E /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D6B289D14390057A31E /* Tabbar.swift */; };
+		339B7D6E289D1BF40057A31E /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D6D289D1BF40057A31E /* WebView.swift */; };
+		339B7D7028A0C4210057A31E /* Battle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D6F28A0C4210057A31E /* Battle.swift */; };
+		339B7D7228A0C49C0057A31E /* BattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D7128A0C49C0057A31E /* BattleModel.swift */; };
+		339B7D7428A111E80057A31E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D7328A111E80057A31E /* ActivityIndicator.swift */; };
+		339B7D7628A362AB0057A31E /* BopomofoBattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D7528A362AB0057A31E /* BopomofoBattleModel.swift */; };
+		33BABA3B26C945AB003D3764 /* nccc_swiftuiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA3A26C945AB003D3764 /* nccc_swiftuiApp.swift */; };
+		33BABA3D26C945AB003D3764 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA3C26C945AB003D3764 /* LoginView.swift */; };
+		33BABA3F26C945B2003D3764 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BABA3E26C945B2003D3764 /* Assets.xcassets */; };
+		33BABA4226C945B2003D3764 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BABA4126C945B2003D3764 /* Preview Assets.xcassets */; };
+		33BABA4D26C94795003D3764 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA4C26C94795003D3764 /* ColorModel.swift */; };
+		33BABA4F26C95C31003D3764 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA4E26C95C31003D3764 /* TextField.swift */; };
+		33BABA5126C95DEB003D3764 /* DeviceConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA5026C95DEB003D3764 /* DeviceConfigModel.swift */; };
+		33BABA5326C96043003D3764 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA5226C96043003D3764 /* Login.swift */; };
+		33BABA5526C9756B003D3764 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA5426C9756A003D3764 /* MainButton.swift */; };
+		33BABA5726CA438E003D3764 /* RegisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA5626CA438E003D3764 /* RegisView.swift */; };
+		33BABA5B26CA692B003D3764 /* RegisChangeCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA5A26CA692B003D3764 /* RegisChangeCodeView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A8267B5A7BDE77A6CBF7377 /* Pods-alphacarbon-wordle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.release.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.release.xcconfig"; sourceTree = "<group>"; };
+		2EF38F758A9A6B44AEC34DD0 /* Pods-alphacarbon-wordle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.debug.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.debug.xcconfig"; sourceTree = "<group>"; };
+		3397B57728A3AE9C00651FEE /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		3397B57B28A510BD00651FEE /* WorldleFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldleFieldView.swift; sourceTree = "<group>"; };
+		3397B57D28A5FACC00651FEE /* FieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
+		3397B57F28A5FD8C00651FEE /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
+		339B7D69289D13850057A31E /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		339B7D6B289D14390057A31E /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
+		339B7D6D289D1BF40057A31E /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		339B7D6F28A0C4210057A31E /* Battle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battle.swift; sourceTree = "<group>"; };
+		339B7D7128A0C49C0057A31E /* BattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleModel.swift; sourceTree = "<group>"; };
+		339B7D7328A111E80057A31E /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		339B7D7528A362AB0057A31E /* BopomofoBattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BopomofoBattleModel.swift; sourceTree = "<group>"; };
+		33BABA3726C945AB003D3764 /* alphacarbon-wordle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "alphacarbon-wordle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33BABA3A26C945AB003D3764 /* nccc_swiftuiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nccc_swiftuiApp.swift; sourceTree = "<group>"; };
+		33BABA3C26C945AB003D3764 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		33BABA3E26C945B2003D3764 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		33BABA4126C945B2003D3764 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		33BABA4326C945B2003D3764 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33BABA4C26C94795003D3764 /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		33BABA4E26C95C31003D3764 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		33BABA5026C95DEB003D3764 /* DeviceConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceConfigModel.swift; sourceTree = "<group>"; };
+		33BABA5226C96043003D3764 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		33BABA5426C9756A003D3764 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
+		33BABA5626CA438E003D3764 /* RegisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisView.swift; sourceTree = "<group>"; };
+		33BABA5A26CA692B003D3764 /* RegisChangeCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisChangeCodeView.swift; sourceTree = "<group>"; };
+		B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_alphacarbon_wordle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		33BABA3426C945AB003D3764 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F2BE2FBE2C78C475043C0EF /* Pods_alphacarbon_wordle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0627C238373086A3B0862A2B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2EF38F758A9A6B44AEC34DD0 /* Pods-alphacarbon-wordle.debug.xcconfig */,
+				0A8267B5A7BDE77A6CBF7377 /* Pods-alphacarbon-wordle.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		33BABA2E26C945AB003D3764 = {
+			isa = PBXGroup;
+			children = (
+				33BABA3926C945AB003D3764 /* alphacarbon-wordle */,
+				33BABA3826C945AB003D3764 /* Products */,
+				0627C238373086A3B0862A2B /* Pods */,
+				86F47DEC7B3559061C82F3FE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		33BABA3826C945AB003D3764 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33BABA3726C945AB003D3764 /* alphacarbon-wordle.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		33BABA3926C945AB003D3764 /* alphacarbon-wordle */ = {
+			isa = PBXGroup;
+			children = (
+				33BABA4B26C945FD003D3764 /* Views */,
+				33BABA4A26C945F3003D3764 /* Models */,
+				33BABA4926C945E7003D3764 /* ViewModels */,
+				33BABA3A26C945AB003D3764 /* nccc_swiftuiApp.swift */,
+				33BABA3E26C945B2003D3764 /* Assets.xcassets */,
+				33BABA4326C945B2003D3764 /* Info.plist */,
+				33BABA4026C945B2003D3764 /* Preview Content */,
+			);
+			path = "alphacarbon-wordle";
+			sourceTree = "<group>";
+		};
+		33BABA4026C945B2003D3764 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				33BABA4126C945B2003D3764 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		33BABA4926C945E7003D3764 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				33BABA4C26C94795003D3764 /* ColorModel.swift */,
+				33BABA5026C95DEB003D3764 /* DeviceConfigModel.swift */,
+				339B7D7128A0C49C0057A31E /* BattleModel.swift */,
+				339B7D7528A362AB0057A31E /* BopomofoBattleModel.swift */,
+				3397B57728A3AE9C00651FEE /* WebViewModel.swift */,
+				3397B57D28A5FACC00651FEE /* FieldModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		33BABA4A26C945F3003D3764 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				33BABA5226C96043003D3764 /* Login.swift */,
+				339B7D6B289D14390057A31E /* Tabbar.swift */,
+				339B7D6F28A0C4210057A31E /* Battle.swift */,
+				3397B57F28A5FD8C00651FEE /* Square.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		33BABA4B26C945FD003D3764 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				33BABA3C26C945AB003D3764 /* LoginView.swift */,
+				33BABA4E26C95C31003D3764 /* TextField.swift */,
+				33BABA5426C9756A003D3764 /* MainButton.swift */,
+				33BABA5626CA438E003D3764 /* RegisView.swift */,
+				33BABA5A26CA692B003D3764 /* RegisChangeCodeView.swift */,
+				339B7D69289D13850057A31E /* TabbarView.swift */,
+				339B7D6D289D1BF40057A31E /* WebView.swift */,
+				339B7D7328A111E80057A31E /* ActivityIndicator.swift */,
+				3397B57B28A510BD00651FEE /* WorldleFieldView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		86F47DEC7B3559061C82F3FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		33BABA3626C945AB003D3764 /* alphacarbon-wordle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33BABA4626C945B2003D3764 /* Build configuration list for PBXNativeTarget "alphacarbon-wordle" */;
+			buildPhases = (
+				5945B85FE2DEC5624E205FF0 /* [CP] Check Pods Manifest.lock */,
+				33BABA3326C945AB003D3764 /* Sources */,
+				33BABA3426C945AB003D3764 /* Frameworks */,
+				33BABA3526C945AB003D3764 /* Resources */,
+				2BE4558B313D08E45A3580EE /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "alphacarbon-wordle";
+			productName = "alphacarbon-wordle";
+			productReference = 33BABA3726C945AB003D3764 /* alphacarbon-wordle.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		33BABA2F26C945AB003D3764 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					33BABA3626C945AB003D3764 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = 33BABA3226C945AB003D3764 /* Build configuration list for PBXProject "alphacarbon-wordle" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 33BABA2E26C945AB003D3764;
+			productRefGroup = 33BABA3826C945AB003D3764 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				33BABA3626C945AB003D3764 /* alphacarbon-wordle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		33BABA3526C945AB003D3764 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33BABA4226C945B2003D3764 /* Preview Assets.xcassets in Resources */,
+				33BABA3F26C945B2003D3764 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2BE4558B313D08E45A3580EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5945B85FE2DEC5624E205FF0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-alphacarbon-wordle-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		33BABA3326C945AB003D3764 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3397B58028A5FD8C00651FEE /* Square.swift in Sources */,
+				33BABA4F26C95C31003D3764 /* TextField.swift in Sources */,
+				339B7D7428A111E80057A31E /* ActivityIndicator.swift in Sources */,
+				339B7D7628A362AB0057A31E /* BopomofoBattleModel.swift in Sources */,
+				3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */,
+				339B7D7028A0C4210057A31E /* Battle.swift in Sources */,
+				33BABA5126C95DEB003D3764 /* DeviceConfigModel.swift in Sources */,
+				339B7D7228A0C49C0057A31E /* BattleModel.swift in Sources */,
+				33BABA5526C9756B003D3764 /* MainButton.swift in Sources */,
+				339B7D6C289D14390057A31E /* Tabbar.swift in Sources */,
+				33BABA3D26C945AB003D3764 /* LoginView.swift in Sources */,
+				33BABA5326C96043003D3764 /* Login.swift in Sources */,
+				33BABA4D26C94795003D3764 /* ColorModel.swift in Sources */,
+				33BABA5B26CA692B003D3764 /* RegisChangeCodeView.swift in Sources */,
+				33BABA3B26C945AB003D3764 /* nccc_swiftuiApp.swift in Sources */,
+				339B7D6E289D1BF40057A31E /* WebView.swift in Sources */,
+				3397B57C28A510BD00651FEE /* WorldleFieldView.swift in Sources */,
+				339B7D6A289D13850057A31E /* TabbarView.swift in Sources */,
+				3397B57E28A5FACC00651FEE /* FieldModel.swift in Sources */,
+				33BABA5726CA438E003D3764 /* RegisView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		33BABA4426C945B2003D3764 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		33BABA4526C945B2003D3764 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		33BABA4726C945B2003D3764 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EF38F758A9A6B44AEC34DD0 /* Pods-alphacarbon-wordle.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"alphacarbon-wordle/Preview Content\"";
+				DEVELOPMENT_TEAM = A57RM36QLM;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "alphacarbon-wordle/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		33BABA4826C945B2003D3764 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A8267B5A7BDE77A6CBF7377 /* Pods-alphacarbon-wordle.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"alphacarbon-wordle/Preview Content\"";
+				DEVELOPMENT_TEAM = A57RM36QLM;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "alphacarbon-wordle/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		33BABA3226C945AB003D3764 /* Build configuration list for PBXProject "alphacarbon-wordle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33BABA4426C945B2003D3764 /* Debug */,
+				33BABA4526C945B2003D3764 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33BABA4626C945B2003D3764 /* Build configuration list for PBXNativeTarget "alphacarbon-wordle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33BABA4726C945B2003D3764 /* Debug */,
+				33BABA4826C945B2003D3764 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 33BABA2F26C945AB003D3764 /* Project object */;
+}
