@@ -49,7 +49,7 @@ struct WebView: UIViewRepresentable {
                         let encodedString = JSON(data as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
                         
                         let jsonData = JSON(encodedString)
-//                        wordleLocalEvaluations = jsonData["evaluations"].arrayValue
+
                         wordleLocalGuess = jsonData["game"]["boardState"].arrayValue//.map({$0.stringValue})
                         
                         //record each char's index of solution
@@ -57,7 +57,7 @@ struct WebView: UIViewRepresentable {
                         //eg. "funny => ["n": [2, 3], ...]"
                         var ans: [Character: [Int]] = [:]
                         //record if last guess' index is evaluated
-//                        print("ans: ", ans)
+
                         let solution = wordleAns
                         
                         //init the ans
@@ -105,8 +105,7 @@ struct WebView: UIViewRepresentable {
                                 }
                                 count+=1
                             }
-//                            print("My evaluate for Wordle", guessStr, isEvaluate)
-                            
+                        
                             wordleLocalEvaluations[guessCount] = isEvaluate.map{evaluateResultToStr(evaluateResult: $0)}
                             guessCount += 1
                         }

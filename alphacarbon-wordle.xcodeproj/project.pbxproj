@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F2BE2FBE2C78C475043C0EF /* Pods_alphacarbon_wordle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */; };
+		333A7E8F298B9F390072C3D1 /* GenericBattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333A7E8E298B9F390072C3D1 /* GenericBattleModel.swift */; };
 		3382096E295C4FC200284D59 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3382096D295C4FC200284D59 /* LoginViewModel.swift */; };
 		3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57728A3AE9C00651FEE /* WebViewModel.swift */; };
 		3397B57C28A510BD00651FEE /* WorldleFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57B28A510BD00651FEE /* WorldleFieldView.swift */; };
@@ -17,9 +18,7 @@
 		339B7D6C289D14390057A31E /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D6B289D14390057A31E /* Tabbar.swift */; };
 		339B7D6E289D1BF40057A31E /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D6D289D1BF40057A31E /* WebView.swift */; };
 		339B7D7028A0C4210057A31E /* Battle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D6F28A0C4210057A31E /* Battle.swift */; };
-		339B7D7228A0C49C0057A31E /* BattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D7128A0C49C0057A31E /* BattleModel.swift */; };
 		339B7D7428A111E80057A31E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D7328A111E80057A31E /* ActivityIndicator.swift */; };
-		339B7D7628A362AB0057A31E /* BopomofoBattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B7D7528A362AB0057A31E /* BopomofoBattleModel.swift */; };
 		33BABA3B26C945AB003D3764 /* nccc_swiftuiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA3A26C945AB003D3764 /* nccc_swiftuiApp.swift */; };
 		33BABA3D26C945AB003D3764 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA3C26C945AB003D3764 /* LoginView.swift */; };
 		33BABA3F26C945B2003D3764 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BABA3E26C945B2003D3764 /* Assets.xcassets */; };
@@ -36,6 +35,7 @@
 /* Begin PBXFileReference section */
 		0A8267B5A7BDE77A6CBF7377 /* Pods-alphacarbon-wordle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.release.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.release.xcconfig"; sourceTree = "<group>"; };
 		2EF38F758A9A6B44AEC34DD0 /* Pods-alphacarbon-wordle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.debug.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.debug.xcconfig"; sourceTree = "<group>"; };
+		333A7E8E298B9F390072C3D1 /* GenericBattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBattleModel.swift; sourceTree = "<group>"; };
 		3382096D295C4FC200284D59 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3397B57728A3AE9C00651FEE /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		3397B57B28A510BD00651FEE /* WorldleFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldleFieldView.swift; sourceTree = "<group>"; };
@@ -45,9 +45,7 @@
 		339B7D6B289D14390057A31E /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		339B7D6D289D1BF40057A31E /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		339B7D6F28A0C4210057A31E /* Battle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battle.swift; sourceTree = "<group>"; };
-		339B7D7128A0C49C0057A31E /* BattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleModel.swift; sourceTree = "<group>"; };
 		339B7D7328A111E80057A31E /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		339B7D7528A362AB0057A31E /* BopomofoBattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BopomofoBattleModel.swift; sourceTree = "<group>"; };
 		33BABA3726C945AB003D3764 /* alphacarbon-wordle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "alphacarbon-wordle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33BABA3A26C945AB003D3764 /* nccc_swiftuiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nccc_swiftuiApp.swift; sourceTree = "<group>"; };
 		33BABA3C26C945AB003D3764 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -130,11 +128,10 @@
 			children = (
 				33BABA4C26C94795003D3764 /* ColorModel.swift */,
 				33BABA5026C95DEB003D3764 /* DeviceConfigModel.swift */,
-				339B7D7128A0C49C0057A31E /* BattleModel.swift */,
-				339B7D7528A362AB0057A31E /* BopomofoBattleModel.swift */,
 				3397B57728A3AE9C00651FEE /* WebViewModel.swift */,
 				3397B57D28A5FACC00651FEE /* FieldModel.swift */,
 				3382096D295C4FC200284D59 /* LoginViewModel.swift */,
+				333A7E8E298B9F390072C3D1 /* GenericBattleModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -288,14 +285,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3397B58028A5FD8C00651FEE /* Square.swift in Sources */,
+				333A7E8F298B9F390072C3D1 /* GenericBattleModel.swift in Sources */,
 				33BABA4F26C95C31003D3764 /* TextField.swift in Sources */,
 				3382096E295C4FC200284D59 /* LoginViewModel.swift in Sources */,
 				339B7D7428A111E80057A31E /* ActivityIndicator.swift in Sources */,
-				339B7D7628A362AB0057A31E /* BopomofoBattleModel.swift in Sources */,
 				3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */,
 				339B7D7028A0C4210057A31E /* Battle.swift in Sources */,
 				33BABA5126C95DEB003D3764 /* DeviceConfigModel.swift in Sources */,
-				339B7D7228A0C49C0057A31E /* BattleModel.swift in Sources */,
 				33BABA5526C9756B003D3764 /* MainButton.swift in Sources */,
 				339B7D6C289D14390057A31E /* Tabbar.swift in Sources */,
 				33BABA3D26C945AB003D3764 /* LoginView.swift in Sources */,

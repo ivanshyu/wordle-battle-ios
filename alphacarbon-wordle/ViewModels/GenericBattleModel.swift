@@ -1,8 +1,8 @@
 //
-//  BattleModel.swift
+//  GenericBattleModel.swift
 //  alphacarbon-wordle
 //
-//  Created by 徐胤桓 on 2022/8/8.
+//  Created by 徐胤桓 on 2023/2/2.
 //
 
 import Foundation
@@ -13,13 +13,15 @@ import Alamofire
 
 
 
-class BattleModel: ObservableObject{
+class GenericBattleModel: ObservableObject{
     @Published var connectionOpt: ConnectionMetaData!
+    var type: BattleType!
+
     var manager: SocketManager!
     var socket: SocketIOClient!
     let group = DispatchGroup()
     @Published var userCount = 0
-    @Published var wordleState = WordleState.loading
+    @Published var state = WordleState.loading
     @Published var result : [JSON] = []
     
     @Published var gameStatus = GameStatus.inProgress
@@ -39,8 +41,10 @@ class BattleModel: ObservableObject{
         
     @Published var nowCompetitor: Competitor!
     
-    init(connectionOpt: ConnectionMetaData){
+    init(connectionOpt: ConnectionMetaData, type: BattleType){
         self.connectionOpt = connectionOpt
+        self.type = type
+
         let competitor = Competitor(id: connectionOpt.id, name: connectionOpt.name)
         self.competitors.append(competitor)
         self.nowCompetitor = competitor
@@ -51,14 +55,18 @@ class BattleModel: ObservableObject{
         manager = SocketManager(socketURL: URL(string: "http://140.119.163.70:3030")!, config: [.log(false), .compress])
         socket = manager.defaultSocket
         socket.connect()
-        getTodayAns(){ ans in
-            wordleAns = ans
+        
+        if type == .Wordle{
+            getTodayAns(){ ans in
+                wordleAns = ans
+            }
         }
+        
         socket.on(clientEvent: .connect) {data, ack in
             print("socket connected")
-            self.wordleState = WordleState.waiting
+            self.state = WordleState.waiting
         }
-        socket.on("total_user_wordle"){data, ack in
+        socket.on("total_user_\(type.display())"){data, ack in
             print("total_user recv: ", data)
             guard let count = data[0] as? Int else{
                 print("err while parsing data")
@@ -66,57 +74,65 @@ class BattleModel: ObservableObject{
             }
             self.userCount = count
         }
-        socket.on("start_wordle"){data, ack in
+        socket.on("start_\(type.display())"){data, ack in
             // handle when user reconnect, ignore this event
-            if self.wordleState != WordleState.Prepare{
+            if self.state != WordleState.Prepare{
                 return
             }
-            print("start_wordle recv", data)
+            print("start_\(type.display()) recv", data)
             guard data[0] as! Bool else{
                 print("err while parsing data")
                 return
             }
-            self.wordleState = WordleState.Start
+            self.state = WordleState.Start
             /// #NOTE: When user reconnect, timer won't be null
             if self.timer == nil {
                 print("timer is not nil")
                 self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){_ in
                     
                     (self.mins, self.secs) = timeSequence(mins: self.mins, secs: self.secs)
-                    if self.wordleState == WordleState.End {
+                    if self.state == WordleState.End {
                         self.timer?.invalidate()
-                    }else if self.wordleState == WordleState.Submit {
+                    }else if self.state == WordleState.Submit {
                         return
                     }
                     
                     //self.emit.localEvaluation
-                    self.evaluationWordle()
-
-                    self.gameStatus = wordleLocalGameStatus
+                    self.evaluation()
+                    
+                    switch type {
+                    case .Wordle:
+                        self.gameStatus = wordleLocalGameStatus
+                    case .Bopomofo:
+                        self.gameStatus = bopomofoLocalGameStatus
+                    }
+                    
                     if self.gameStatus == GameStatus.win{
                         if self.submitTime == ""{
                             self.submitTime = String(format: "%02d:%02d", arguments: [self.mins, self.secs])
                             print("chage state to submit, time: \(self.submitTime)")
                         }
-                        self.completeWordle()
+                        self.complete()
 
                     }else if self.gameStatus == GameStatus.lose{
                         if self.submitTime == ""{
                             self.submitTime = String(format: "%02d:%02d", arguments: [15, 00])
                             print("chage state to submit, time: \(self.submitTime)")
                         }
-                        self.completeWordle()
+                        self.complete()
 
                     }
                 }
                 //after reconnect
-            } else if wordleLocalGameStatus == GameStatus.win || wordleLocalGameStatus == GameStatus.lose{
-                self.completeWordle()
+            } else if type == BattleType.Wordle && (wordleLocalGameStatus == GameStatus.win || wordleLocalGameStatus == GameStatus.lose){
+                self.complete()
+            }  else if type == BattleType.Bopomofo && (bopomofoLocalGameStatus == GameStatus.win || bopomofoLocalGameStatus == GameStatus.lose){
+                self.complete()
             }
             
 
         }
-        socket.on("wordle_evaluation"){data, ack in
+        socket.on("\(type.display())_evaluation"){data, ack in
             //print(data)
             let encodedString = JSON(data[0]).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
             let json = JSON(encodedString)
@@ -135,9 +151,9 @@ class BattleModel: ObservableObject{
 //
 //        }
         
-        socket.on("finish_wordle"){data, ack in
+        socket.on("finish_\(type.display())"){data, ack in
             self.result = JSON(data[0]).arrayValue
-            self.wordleState = WordleState.End
+            self.state = WordleState.End
         }
     }
     func getTodayAns(complete: @escaping (_ ans: String) -> Void){
@@ -158,11 +174,11 @@ class BattleModel: ObservableObject{
     }
     
     func connect(){
-        if wordleState == WordleState.loading{
+        if state == WordleState.loading{
             return
         }
-        wordleState = WordleState.Prepare
-        self.socket.emit("user_connect_wordle", ["userId": self.connectionOpt.id])
+        state = WordleState.Prepare
+        self.socket.emit("user_connect_\(type.display())", ["userId": self.connectionOpt.id])
         if self.heartbeatTimer == nil {
             self.heartbeatTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true){_ in
                 self.heartBeat()
@@ -170,47 +186,62 @@ class BattleModel: ObservableObject{
         }
     }
     
-    func startWordle(complete: @escaping (_ status: Bool) -> Void){
-        self.socket.emit("start_wordle", [])
+    func start(complete: @escaping (_ status: Bool) -> Void){
+        self.socket.emit("start_\(type.display())", [])
         
     }
     
-    func evaluationWordle(){
-    
-        let hold : [JSON] = wordleLocalEvaluations.map{($0 ?? []).count == 0 ? JSON(NSNull()) : JSON($0!)}
-        
-        wordleLocalGuessForEvaluation = wordleLocalGuess.map{$0.stringValue}
-        
-        while wordleLocalGuessForEvaluation.count<6{
-            wordleLocalGuessForEvaluation.append("")
+    func evaluation(){
+        switch type {
+        case .Wordle:
+            let hold : [JSON] = wordleLocalEvaluations.map{($0 ?? []).count == 0 ? JSON(NSNull()) : JSON($0!)}
+            
+            wordleLocalGuessForEvaluation = wordleLocalGuess.map{$0.stringValue}
+            
+            while wordleLocalGuessForEvaluation.count<6{
+                wordleLocalGuessForEvaluation.append("")
+            }
+            let params = ["name": self.connectionOpt.name, "id":  self.connectionOpt.id, "evaluations": [hold.description, wordleLocalGuessForEvaluation]] as [String : Any]
+            self.socket.emit("\(type.display())_evaluation", params)
+            
+        case .Bopomofo:
+            let hold : [JSON] = bopomofoLocalEvaluations.map{($0 ?? []).count == 0 ? JSON(NSNull()) : JSON($0!)}
+            
+            bopomofoLocalGuessForEvaluation = bopomofoLocalGuess.map{$0.stringValue}
+            
+            while bopomofoLocalGuessForEvaluation.count<6{
+                bopomofoLocalGuessForEvaluation.append("")
+            }
+            let params = ["name": self.connectionOpt.name, "id":  self.connectionOpt.id, "evaluations": [hold.description, bopomofoLocalGuessForEvaluation]] as [String : Any]
+            self.socket.emit("\(type.display())_evaluation", params)
+            
+        case .none:
+            return
         }
         
-        let params = ["name": self.connectionOpt.name, "id":  self.connectionOpt.id, "evaluations": [hold.description, wordleLocalGuessForEvaluation]] as [String : Any]
-        self.socket.emit("wordle_evaluation", params)
-        
     }
     
-    func completeWordle(){
+    func complete(){
         print("complete")
         let params = ["time": submitTime, "name": self.connectionOpt.name, "id":  self.connectionOpt.id]
-        self.socket.emit("complete_wordle", params)
-        if self.wordleState != WordleState.End{
-            self.wordleState = WordleState.Submit
+        self.socket.emit("complete_\(type.display())", params)
+        if self.state != WordleState.End{
+            self.state = WordleState.Submit
         }
     }
     
     func heartBeat(){
         print("heart beat")
-        self.socket.emit("wordle_heartbeat", ["userId": self.connectionOpt.id])
+        self.socket.emit("\(type.display())_heartbeat", ["userId": self.connectionOpt.id])
     }
     func closeSocket(){
         socket.disconnect()
     }
     func reconnect(){
         socket.connect()
-        if wordleState != WordleState.waiting{
+        if state != WordleState.waiting{
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.socket.emit("user_connect_wordle", ["userId": self.connectionOpt.id])
+                self.socket.emit("user_connect_\(self.type.display())", ["userId": self.connectionOpt.id])
             }
         }
     }
@@ -218,7 +249,7 @@ class BattleModel: ObservableObject{
     @objc func applicationDidEnterBackground(_ notification: NotificationCenter) {
         print("Enter Background")
         appDidEnterBackgroundDate = Date()
-        if wordleState == WordleState.End || wordleState == WordleState.Submit{
+        if state == WordleState.End || state == WordleState.Submit{
             self.timer = nil
         }
     }
@@ -230,7 +261,7 @@ class BattleModel: ObservableObject{
         let difference = calendar.dateComponents([.second], from: previousDate, to: Date())
         let seconds = difference.second!
         print("Enter Foreground, Delay: \(seconds) secs")
-        if wordleState == WordleState.Start || wordleState == WordleState.Submit{
+        if state == WordleState.Start || state == WordleState.Submit{
             secs += seconds
         }
         

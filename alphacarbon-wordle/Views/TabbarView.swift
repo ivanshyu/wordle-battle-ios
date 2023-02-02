@@ -11,12 +11,12 @@ import SwiftyJSON
 
 struct TabbarView: View {
     private var connectionMetaData: ConnectionMetaData!
-    @ObservedObject var battle: BattleModel
-    @ObservedObject var bopomofoBattle: BopomofoBattleModel
+    @ObservedObject var battle: GenericBattleModel
+    @ObservedObject var bopomofoBattle: GenericBattleModel
     init(connectionMetaData: ConnectionMetaData){
         self.connectionMetaData = connectionMetaData
-        self.battle = BattleModel(connectionOpt: connectionMetaData)
-        self.bopomofoBattle = BopomofoBattleModel(connectionOpt: connectionMetaData)
+        self.battle = GenericBattleModel(connectionOpt: connectionMetaData, type: BattleType.Wordle)
+        self.bopomofoBattle = GenericBattleModel(connectionOpt: connectionMetaData, type: BattleType.Bopomofo)
 
         let image = UIImage.gradientImageWithBounds(
             bounds: CGRect( x: 0, y: 0, width: UIScreen.main.scale, height: 10),
@@ -64,7 +64,7 @@ struct TabbarView_Previews: PreviewProvider {
 
 struct WordleView: View {
     @State private var showWebView = false
-    @EnvironmentObject var battle : BattleModel
+    @EnvironmentObject var battle : GenericBattleModel
     var isShowing: Bool = true
     
     @State private var competitors: [JSON] = []
@@ -81,21 +81,21 @@ struct WordleView: View {
             Spacer()
                 .frame(width: fullScreenSize.width, height: 100, alignment: .top)
             //FieldView().environmentObject(field)
-            if battle.wordleState == WordleState.loading {
+            if battle.state == WordleState.loading {
                 Spacer()
                 ActivityIndicator(isAnimating: isShowing).configure { $0.color = .white }
                 Text("載入中，請稍候")
                     .foregroundColor(labelColor)
                 Spacer()
             }
-            else if battle.wordleState == WordleState.waiting {
+            else if battle.state == WordleState.waiting {
                 Spacer()
                 Button("開始列隊"){
                     battle.connect()
                 }.buttonStyle(MainButton())
                     .padding()
                     .padding(.vertical , between.height)
-            } else if battle.wordleState == WordleState.Prepare {
+            } else if battle.state == WordleState.Prepare {
                 Spacer()
                 
                 HStack{
@@ -108,12 +108,12 @@ struct WordleView: View {
                 }
                 
                 Button("申請對戰"){
-                    battle.startWordle(){_ in
+                    battle.start(){_ in
                     }
                 }.buttonStyle(MainButton())
                     .padding()
                     .padding(.vertical , between.height)
-            } else if battle.wordleState == WordleState.Start{
+            } else if battle.state == WordleState.Start{
                 HStack{
                     
                     Button("上一個"){
@@ -152,7 +152,7 @@ struct WordleView: View {
                     .sheet(isPresented: $showWebView) {
                         webViewModel.wordleWebview
                     }
-            } else if battle.wordleState == WordleState.Submit {
+            } else if battle.state == WordleState.Submit {
                 HStack{
                     
                     Button("上一個"){
@@ -190,7 +190,7 @@ struct WordleView: View {
                     .foregroundColor(.white)
                     .bold()
                 
-            } else if battle.wordleState == WordleState.End {
+            } else if battle.state == WordleState.End {
                 Spacer()
                 Text("比賽結束！")
                     .foregroundColor(.white)
@@ -220,7 +220,7 @@ struct WordleView: View {
         .onChange(of: battle.competitorIdx){_ in
             self.updateField()
         }
-        .onChange(of: battle.wordleState){newValue in
+        .onChange(of: battle.state){newValue in
             print("detect state changed: ", newValue)
             if newValue == WordleState.Start{
                 self.timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true){_ in
@@ -269,7 +269,7 @@ struct WordleView: View {
 //            print(result, field.squareArray.count)
             for i in 0...4{
                 field.squareArray[count*5 + i].color = result[i]
-                if self.battle.wordleState == WordleState.Submit && str.count > 0{
+                if self.battle.state == WordleState.Submit && str.count > 0{
                     field.squareArray[count*5 + i].char = String(str.removeFirst())
                 }
             }
@@ -284,7 +284,7 @@ struct WordleView: View {
 
 struct BopomofoView: View {
     @State private var showWebView = false
-    @EnvironmentObject var battle : BopomofoBattleModel
+    @EnvironmentObject var battle : GenericBattleModel
     var isShowing: Bool = true
     
     @State private var competitors: [JSON] = []
@@ -299,21 +299,21 @@ struct BopomofoView: View {
             Spacer()
                 .frame(width: fullScreenSize.width, height: 100, alignment: .top)
 
-            if battle.bopomofoState == WordleState.loading {
+            if battle.state == WordleState.loading {
                 Spacer()
                 ActivityIndicator(isAnimating: isShowing).configure { $0.color = .white }
                 Text("載入中，請稍候")
                     .foregroundColor(labelColor)
                 Spacer()
             }
-            else if battle.bopomofoState == WordleState.waiting {
+            else if battle.state == WordleState.waiting {
                 Spacer()
                 Button("開始列隊"){
                     battle.connect()
                 }.buttonStyle(MainButton())
                     .padding()
                     .padding(.vertical , between.height)
-            } else if battle.bopomofoState == WordleState.Prepare {
+            } else if battle.state == WordleState.Prepare {
                 Spacer()
 
                 HStack{
@@ -326,12 +326,12 @@ struct BopomofoView: View {
                 }
                 
                 Button("申請對戰"){
-                    battle.startBopomofo(){_ in
+                    battle.start(){_ in
                     }
                 }.buttonStyle(MainButton())
                     .padding()
                     .padding(.vertical , between.height)
-            } else if battle.bopomofoState == WordleState.Start{
+            } else if battle.state == WordleState.Start{
                 HStack{
                     
                     Button("上一個"){
@@ -369,9 +369,9 @@ struct BopomofoView: View {
                 }.buttonStyle(SecondaryButton())
                     .padding()
                     .sheet(isPresented: $showWebView) {
-                        battle.webview
+                        webViewModel.bopomofoWebview
                     }
-            } else if battle.bopomofoState == WordleState.Submit {
+            } else if battle.state == WordleState.Submit {
                 HStack{
                     
                     Button("上一個"){
@@ -408,7 +408,7 @@ struct BopomofoView: View {
                 Text("解答：\(bopomofoLocalAns)")
                     .foregroundColor(.white)
                     .bold()
-            } else if battle.bopomofoState == WordleState.End {
+            } else if battle.state == WordleState.End {
                 Spacer()
                 Text("比賽結束！")
                     .foregroundColor(.white)
@@ -426,7 +426,7 @@ struct BopomofoView: View {
                 }.buttonStyle(SecondaryButton())
                     .padding()
                     .sheet(isPresented: $showWebView) {
-                        battle.webview
+                        webViewModel.bopomofoWebview
                     }
                 Spacer()
                 
@@ -439,7 +439,7 @@ struct BopomofoView: View {
             print("battle.competitorIdx onChange")
             self.updateField()
         }
-        .onChange(of: battle.bopomofoState){newValue in
+        .onChange(of: battle.state){newValue in
             if newValue == WordleState.Start{
                 self.timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true){_ in
                     self.updateField()
@@ -457,8 +457,10 @@ struct BopomofoView: View {
             field.squareArray[i].color = .white
         }
         //key is each user id
-        let val: JSON = self.battle.evaluations[self.battle.nowCompetitor.id] ?? JSON(NSNull())
-//        print(self.battle.nowCompetitor, val)
+        guard let val: JSON = self.battle.evaluations[self.battle.nowCompetitor.id] else {
+            return
+        }
+        //        print(self.battle.nowCompetitor, val)
         let allRounds = JSON(val["evaluations"].arrayValue[0] as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
         let allRoundsText = JSON(val["evaluations"].arrayValue[1] as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
 
@@ -486,7 +488,7 @@ struct BopomofoView: View {
 //            print(result, field.squareArray.count)
             for i in 0...4{
                 field.squareArray[count*5 + i].color = result[i]
-                if self.battle.bopomofoState == WordleState.Submit{
+                if self.battle.state == WordleState.Submit{
                     field.squareArray[count*5 + i].char = String(str.removeFirst())
                 }
             }

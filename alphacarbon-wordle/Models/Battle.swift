@@ -77,3 +77,15 @@ struct Competitor {
     var id: String
     var name: String
 }
+
+enum BattleType{
+    case Wordle
+    case Bopomofo
+    
+    func display () -> String {
+        switch self{
+            case .Bopomofo: return "bopomofo"
+            case .Wordle: return "wordle"
+        }
+    }
+}

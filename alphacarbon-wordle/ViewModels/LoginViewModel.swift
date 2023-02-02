@@ -12,7 +12,7 @@ import AuthenticationServices
 
 class LoginViewModel: ObservableObject {
     let isTest = false
-    @Published var isLogin = true
+    @Published var isLogin = false
     @Published var email = ""
     @Published var name = ""
     init(){
@@ -23,6 +23,7 @@ class LoginViewModel: ObservableObject {
             return
         }
         if let appleId = UserDefaults().string(forKey: "appleId"){
+            print("appleId ", appleId)
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             appleIDProvider.getCredentialState(forUserID: appleId) { (credentialState, error) in
                 switch credentialState {
