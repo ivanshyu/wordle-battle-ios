@@ -10,9 +10,14 @@ import SwiftUI
 import SwiftyJSON
 
 struct TabbarView: View {
-    @StateObject private var battle = BattleModel()
-    @StateObject private var bopomofoBattle = BopomofoBattleModel()
-    init(){
+    private var connectionMetaData: ConnectionMetaData!
+    @ObservedObject var battle: BattleModel
+    @ObservedObject var bopomofoBattle: BopomofoBattleModel
+    init(connectionMetaData: ConnectionMetaData){
+        self.connectionMetaData = connectionMetaData
+        self.battle = BattleModel(connectionOpt: connectionMetaData)
+        self.bopomofoBattle = BopomofoBattleModel(connectionOpt: connectionMetaData)
+
         let image = UIImage.gradientImageWithBounds(
             bounds: CGRect( x: 0, y: 0, width: UIScreen.main.scale, height: 10),
             colors: [
@@ -52,7 +57,7 @@ struct TabbarView: View {
 struct TabbarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            TabbarView()
+            TabbarView(connectionMetaData: ConnectionMetaData(id: "", name: ""))
         }
     }
 }
@@ -69,14 +74,21 @@ struct WordleView: View {
     @StateObject private var field = FieldModel()
     @State var timer: Timer? = nil
     
-    @State var userFieldId : String = UIDevice.current.name
-    
+    @State private var progress = 0.0
+
     var body: some View {
         VStack{
             Spacer()
                 .frame(width: fullScreenSize.width, height: 100, alignment: .top)
             //FieldView().environmentObject(field)
-            if battle.wordleState == WordleState.waiting {
+            if battle.wordleState == WordleState.loading {
+                Spacer()
+                ActivityIndicator(isAnimating: isShowing).configure { $0.color = .white }
+                Text("載入中，請稍候")
+                    .foregroundColor(labelColor)
+                Spacer()
+            }
+            else if battle.wordleState == WordleState.waiting {
                 Spacer()
                 Button("開始列隊"){
                     battle.connect()
@@ -96,11 +108,7 @@ struct WordleView: View {
                 }
                 
                 Button("申請對戰"){
-                    battle.startWordle(){status in
-                        print(status)
-                        if status == true{
-                            
-                        }
+                    battle.startWordle(){_ in
                     }
                 }.buttonStyle(MainButton())
                     .padding()
@@ -109,7 +117,7 @@ struct WordleView: View {
                 HStack{
                     
                     Button("上一個"){
-                        userFieldId = self.battle.prevCompetitor()
+                        self.battle.prevCompetitor()
                     }
                     .frame(width: 80, height: 50, alignment: .center)
                     .background(Color.clear)
@@ -117,14 +125,14 @@ struct WordleView: View {
                     
                     Spacer()
                     
-                    Text(userFieldId)
+                    Text(self.battle.nowCompetitor.name)
                         .foregroundColor(.white)
                         .bold()
                     
                     Spacer()
                     
                     Button("下一個"){
-                        userFieldId = self.battle.nextCompetitor()
+                        self.battle.nextCompetitor()
                         
                     }
                     .frame(width: 80, height: 50, alignment: .center)
@@ -148,7 +156,7 @@ struct WordleView: View {
                 HStack{
                     
                     Button("上一個"){
-                        userFieldId = self.battle.prevCompetitor()
+                        self.battle.prevCompetitor()
                     }
                     .frame(width: 80, height: 50, alignment: .center)
                     .background(Color.clear)
@@ -156,14 +164,14 @@ struct WordleView: View {
                     
                     Spacer()
                     
-                    Text(userFieldId)
+                    Text(self.battle.nowCompetitor.name)
                         .foregroundColor(.white)
                         .bold()
                     
                     Spacer()
                     
                     Button("下一個"){
-                        userFieldId = self.battle.nextCompetitor()
+                        self.battle.nextCompetitor()
                     }
                     .frame(width: 80, height: 50, alignment: .center)
                     .background(Color.clear)
@@ -178,7 +186,7 @@ struct WordleView: View {
                 Text("您的花費時間：\(battle.submitTime)")
                     .foregroundColor(.white)
                     .bold()
-                Text("解答：\(wordleLocalAns)")
+                Text("解答：\(wordleAns)")
                     .foregroundColor(.white)
                     .bold()
                 
@@ -213,6 +221,7 @@ struct WordleView: View {
             self.updateField()
         }
         .onChange(of: battle.wordleState){newValue in
+            print("detect state changed: ", newValue)
             if newValue == WordleState.Start{
                 self.timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true){_ in
                     self.updateField()
@@ -227,20 +236,22 @@ struct WordleView: View {
             field.squareArray[i].color = .white
         }
         //key is each user id
-        let val: JSON = self.battle.evaluations[battleNameToId[self.battle.nowCompetitor()] ?? ""] ?? JSON(NSNull())
-        print(self.battle.nowCompetitor(), val)
+        guard let val: JSON = self.battle.evaluations[self.battle.nowCompetitor.id] else {
+            return
+        }
+//        print(self.battle.nowCompetitor, val)
         let allRounds = JSON(val["evaluations"].arrayValue[0] as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
         let allRoundsText = JSON(val["evaluations"].arrayValue[1] as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
 
         let allRoundsTextArr = allRoundsText.arrayValue
 
-        print(allRounds.arrayValue, allRoundsText)
+//        print(allRounds.arrayValue, allRoundsText)
         
         
         var count = 0
         for round in allRounds.arrayValue{
             var str = allRoundsTextArr[count].description.uppercased()
-            print("str", str)
+//            print("str", str)
             if round == JSON(NSNull()){
                 return
             }
@@ -250,13 +261,15 @@ struct WordleView: View {
                     color = .yellow
                 }else if ele.stringValue == "correct"{
                     color = .green
+                }else if ele.stringValue == "error"{
+                    color = .white
                 }
                 return color
             }
-            print(result, field.squareArray.count)
+//            print(result, field.squareArray.count)
             for i in 0...4{
                 field.squareArray[count*5 + i].color = result[i]
-                if self.battle.wordleState == WordleState.Submit{
+                if self.battle.wordleState == WordleState.Submit && str.count > 0{
                     field.squareArray[count*5 + i].char = String(str.removeFirst())
                 }
             }
@@ -281,13 +294,19 @@ struct BopomofoView: View {
     @StateObject private var field = FieldModel()
     @State var timer: Timer? = nil
     
-    @State var userFieldId : String = UIDevice.current.name
     var body: some View {
         VStack{
             Spacer()
                 .frame(width: fullScreenSize.width, height: 100, alignment: .top)
 
-            if battle.bopomofoState == WordleState.waiting {
+            if battle.bopomofoState == WordleState.loading {
+                Spacer()
+                ActivityIndicator(isAnimating: isShowing).configure { $0.color = .white }
+                Text("載入中，請稍候")
+                    .foregroundColor(labelColor)
+                Spacer()
+            }
+            else if battle.bopomofoState == WordleState.waiting {
                 Spacer()
                 Button("開始列隊"){
                     battle.connect()
@@ -307,11 +326,7 @@ struct BopomofoView: View {
                 }
                 
                 Button("申請對戰"){
-                    battle.startBopomofo(){status in
-                        print(status)
-                        if status == true{
-                            
-                        }
+                    battle.startBopomofo(){_ in
                     }
                 }.buttonStyle(MainButton())
                     .padding()
@@ -320,7 +335,7 @@ struct BopomofoView: View {
                 HStack{
                     
                     Button("上一個"){
-                        userFieldId = self.battle.prevCompetitor()
+                        self.battle.prevCompetitor()
                     }
                     .frame(width: 80, height: 50, alignment: .center)
                     .background(Color.clear)
@@ -328,14 +343,14 @@ struct BopomofoView: View {
                     
                     Spacer()
                     
-                    Text(userFieldId)
+                    Text(self.battle.nowCompetitor.name)
                         .foregroundColor(.white)
                         .bold()
                     
                     Spacer()
                     
                     Button("下一個"){
-                        userFieldId = self.battle.nextCompetitor()
+                        self.battle.nextCompetitor()
                         
                     }
                     .frame(width: 80, height: 50, alignment: .center)
@@ -360,7 +375,7 @@ struct BopomofoView: View {
                 HStack{
                     
                     Button("上一個"){
-                        userFieldId = self.battle.prevCompetitor()
+                        self.battle.prevCompetitor()
                     }
                     .frame(width: 80, height: 50, alignment: .center)
                     .background(Color.clear)
@@ -368,14 +383,14 @@ struct BopomofoView: View {
                     
                     Spacer()
                     
-                    Text(userFieldId)
+                    Text(self.battle.nowCompetitor.name)
                         .foregroundColor(.white)
                         .bold()
                     
                     Spacer()
                     
                     Button("下一個"){
-                        userFieldId = self.battle.nextCompetitor()
+                        self.battle.nextCompetitor()
                     }
                     .frame(width: 80, height: 50, alignment: .center)
                     .background(Color.clear)
@@ -421,6 +436,7 @@ struct BopomofoView: View {
         .background(primaryColor)
         .edgesIgnoringSafeArea(.top)
         .onChange(of: battle.competitorIdx){_ in
+            print("battle.competitorIdx onChange")
             self.updateField()
         }
         .onChange(of: battle.bopomofoState){newValue in
@@ -441,20 +457,20 @@ struct BopomofoView: View {
             field.squareArray[i].color = .white
         }
         //key is each user id
-        let val: JSON = self.battle.evaluations[battleNameToId[self.battle.nowCompetitor()] ?? ""] ?? JSON(NSNull())
-        print(self.battle.nowCompetitor(), val)
+        let val: JSON = self.battle.evaluations[self.battle.nowCompetitor.id] ?? JSON(NSNull())
+//        print(self.battle.nowCompetitor, val)
         let allRounds = JSON(val["evaluations"].arrayValue[0] as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
         let allRoundsText = JSON(val["evaluations"].arrayValue[1] as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
 
         let allRoundsTextArr = allRoundsText.arrayValue
 
-        print(allRounds.arrayValue, allRoundsText)
+//        print(allRounds.arrayValue, allRoundsText)
         
         
         var count = 0
         for round in allRounds.arrayValue{
             var str = String(allRoundsTextArr[count].description)
-            print("str", str)
+//            print("str", str)
             if round == JSON(NSNull()){
                 return
             }
@@ -467,7 +483,7 @@ struct BopomofoView: View {
                 }
                 return color
             }
-            print(result, field.squareArray.count)
+//            print(result, field.squareArray.count)
             for i in 0...4{
                 field.squareArray[count*5 + i].color = result[i]
                 if self.battle.bopomofoState == WordleState.Submit{

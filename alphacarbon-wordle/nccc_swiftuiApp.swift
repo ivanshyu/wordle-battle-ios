@@ -11,8 +11,8 @@ import SwiftUI
 struct wordle_swiftuiApp: App {
     var body: some Scene {
         WindowGroup {
-            TabbarView()
-            //LoginView()
+//            TabbarView()
+            LoginView()
         }
     }
 }

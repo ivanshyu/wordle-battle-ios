@@ -9,14 +9,17 @@ import Foundation
 import SocketIO
 import Dispatch
 import SwiftyJSON
+import Alamofire
+
+
 
 class BattleModel: ObservableObject{
-    @Published var connectionOpt = ConnectionMetaData()
+    @Published var connectionOpt: ConnectionMetaData!
     var manager: SocketManager!
     var socket: SocketIOClient!
     let group = DispatchGroup()
     @Published var userCount = 0
-    @Published var wordleState = WordleState.waiting
+    @Published var wordleState = WordleState.loading
     @Published var result : [JSON] = []
     
     @Published var gameStatus = GameStatus.inProgress
@@ -31,13 +34,16 @@ class BattleModel: ObservableObject{
     
     var appDidEnterBackgroundDate: Date!
     
-    var competitors: [String] = []
+    var competitors: [Competitor] = []
     var competitorIdx = 0
-
-    init(){
-        self.competitors.append(UIDevice.current.name)
-        battleNameToId[UIDevice.current.name] = self.connectionOpt.id
-
+        
+    @Published var nowCompetitor: Competitor!
+    
+    init(connectionOpt: ConnectionMetaData){
+        self.connectionOpt = connectionOpt
+        let competitor = Competitor(id: connectionOpt.id, name: connectionOpt.name)
+        self.competitors.append(competitor)
+        self.nowCompetitor = competitor
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -45,10 +51,12 @@ class BattleModel: ObservableObject{
         manager = SocketManager(socketURL: URL(string: "http://140.119.163.70:3030")!, config: [.log(false), .compress])
         socket = manager.defaultSocket
         socket.connect()
-        
+        getTodayAns(){ ans in
+            wordleAns = ans
+        }
         socket.on(clientEvent: .connect) {data, ack in
             print("socket connected")
-            
+            self.wordleState = WordleState.waiting
         }
         socket.on("total_user_wordle"){data, ack in
             print("total_user recv: ", data)
@@ -59,6 +67,7 @@ class BattleModel: ObservableObject{
             self.userCount = count
         }
         socket.on("start_wordle"){data, ack in
+            // handle when user reconnect, ignore this event
             if self.wordleState != WordleState.Prepare{
                 return
             }
@@ -68,10 +77,18 @@ class BattleModel: ObservableObject{
                 return
             }
             self.wordleState = WordleState.Start
+            /// #NOTE: When user reconnect, timer won't be null
             if self.timer == nil {
-                self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){_ in
+                print("timer is not nil")
+                self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){_ in
+                    
                     (self.mins, self.secs) = timeSequence(mins: self.mins, secs: self.secs)
-
+                    if self.wordleState == WordleState.End {
+                        self.timer?.invalidate()
+                    }else if self.wordleState == WordleState.Submit {
+                        return
+                    }
+                    
                     //self.emit.localEvaluation
                     self.evaluationWordle()
 
@@ -80,26 +97,21 @@ class BattleModel: ObservableObject{
                         if self.submitTime == ""{
                             self.submitTime = String(format: "%02d:%02d", arguments: [self.mins, self.secs])
                             print("chage state to submit, time: \(self.submitTime)")
-                            self.wordleState = WordleState.Submit
-                            self.completeWordle(){json in
-                            }
                         }
-                        if self.wordleState == WordleState.End {
-                            self.timer?.invalidate()
-                        }
+                        self.completeWordle()
+
                     }else if self.gameStatus == GameStatus.lose{
                         if self.submitTime == ""{
                             self.submitTime = String(format: "%02d:%02d", arguments: [15, 00])
                             print("chage state to submit, time: \(self.submitTime)")
-                            self.wordleState = WordleState.Submit
-                            self.completeWordle(){json in
-                            }
                         }
-                        if self.wordleState == WordleState.End {
-                            self.timer?.invalidate()
-                        }
+                        self.completeWordle()
+
                     }
                 }
+                //after reconnect
+            } else if wordleLocalGameStatus == GameStatus.win || wordleLocalGameStatus == GameStatus.lose{
+                self.completeWordle()
             }
             
 
@@ -110,22 +122,45 @@ class BattleModel: ObservableObject{
             let json = JSON(encodedString)
             
             self.evaluations[json["id"].description] = json
-            if !self.competitors.contains(json["name"].description){
-                self.competitors.append(json["name"].description)
-                battleNameToId[json["name"].description] = json["id"].description
+            
+            //if it does not exist, add into competitors
+            if self.competitors.filter({$0.id == json["id"].description}).count == 0{
+                self.competitors.append(Competitor(id: json["id"].description, name: json["name"].description))
             }
         }
         
+//        socket.on("complete_wordle"){data, ack in
+//            let encodedString = JSON(data[0]).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
+//            let json = JSON(encodedString)
+//
+//        }
+        
         socket.on("finish_wordle"){data, ack in
-            print("finish_wordle recv", data)
-
             self.result = JSON(data[0]).arrayValue
             self.wordleState = WordleState.End
         }
     }
+    func getTodayAns(complete: @escaping (_ ans: String) -> Void){
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let todayString = formatter.string(from: Date())
+        AF.request("https://www.nytimes.com/svc/wordle/v2/\(todayString).json").responseJSON{ response in
+            switch response.result{
+            case .success(let value):
+                let response = JSON(value)
+                complete(response["solution"].description)
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+
+    }
     
     func connect(){
-        print("in self.connect")
+        if wordleState == WordleState.loading{
+            return
+        }
         wordleState = WordleState.Prepare
         self.socket.emit("user_connect_wordle", ["userId": self.connectionOpt.id])
         if self.heartbeatTimer == nil {
@@ -141,26 +176,26 @@ class BattleModel: ObservableObject{
     }
     
     func evaluationWordle(){
-        let params = ["name": UIDevice.current.name, "id":  self.connectionOpt.id, "evaluations": [wordleLocalEvaluations.description, wordleLocalGuess]] as [String : Any]
+    
+        let hold : [JSON] = wordleLocalEvaluations.map{($0 ?? []).count == 0 ? JSON(NSNull()) : JSON($0!)}
+        
+        wordleLocalGuessForEvaluation = wordleLocalGuess.map{$0.stringValue}
+        
+        while wordleLocalGuessForEvaluation.count<6{
+            wordleLocalGuessForEvaluation.append("")
+        }
+        
+        let params = ["name": self.connectionOpt.name, "id":  self.connectionOpt.id, "evaluations": [hold.description, wordleLocalGuessForEvaluation]] as [String : Any]
         self.socket.emit("wordle_evaluation", params)
-       //print(params)
         
     }
     
-    func completeWordle(complete: @escaping (_ json: JSON) -> Void){
-        let params = ["time": submitTime, "name": UIDevice.current.name, "id":  self.connectionOpt.id]
+    func completeWordle(){
+        print("complete")
+        let params = ["time": submitTime, "name": self.connectionOpt.name, "id":  self.connectionOpt.id]
         self.socket.emit("complete_wordle", params)
-       
-        socket.on("complete_wordle"){data, ack in
-            //print(data)
-            let encodedString = JSON(data[0]).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
-            let json = JSON(encodedString)
-            
-            if let _ = json["name"].string {
-                complete(json)
-            } else {
-                complete(JSON())
-            }
+        if self.wordleState != WordleState.End{
+            self.wordleState = WordleState.Submit
         }
     }
     
@@ -180,18 +215,16 @@ class BattleModel: ObservableObject{
         }
     }
     
-//    @objc func applicationDidBecomeActive(_ notification: NotificationCenter) {
-//        print("Unlock")
-//        reconnect()
-//    }
-    
     @objc func applicationDidEnterBackground(_ notification: NotificationCenter) {
         print("Enter Background")
         appDidEnterBackgroundDate = Date()
+        if wordleState == WordleState.End || wordleState == WordleState.Submit{
+            self.timer = nil
+        }
     }
 
     @objc func applicationWillEnterForeground(_ notification: NotificationCenter) {
-        reconnect()
+//        reconnect()
         guard let previousDate = appDidEnterBackgroundDate else { return }
         let calendar = Calendar.current
         let difference = calendar.dateComponents([.second], from: previousDate, to: Date())
@@ -200,31 +233,38 @@ class BattleModel: ObservableObject{
         if wordleState == WordleState.Start || wordleState == WordleState.Submit{
             secs += seconds
         }
+        
+        
+        // judge if need to reopen app
+        if let sec = calendar.dateComponents([.second], from: previousDate, to: Date()).second{
+            print("sec difference: \(sec)")
+            if sec >= 5{
+                exit(0)
+            }
+        }
     }
     
-    func nowCompetitor() -> String{
-        return competitors[competitorIdx]
-    }
-    
-    func nextCompetitor() -> String{
+    func nextCompetitor() -> Competitor{
         if competitorIdx + 1 >= competitors.count {
             competitorIdx = 0
         }else{
             competitorIdx+=1
         }
+        self.nowCompetitor = competitors[competitorIdx]
         return competitors[competitorIdx]
     }
     
-    func prevCompetitor() -> String{
+    func prevCompetitor() -> Competitor{
         if competitorIdx - 1 < 0 {
             competitorIdx = competitors.count - 1
         }else{
             competitorIdx-=1
         }
+        self.nowCompetitor = competitors[competitorIdx]
         return competitors[competitorIdx]
     }
     
     deinit{
-        closeSocket()
+        //closeSocket()
     }
 }

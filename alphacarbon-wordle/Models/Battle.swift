@@ -10,10 +10,11 @@ import UIKit
 import SwiftyJSON
 
 struct ConnectionMetaData{
-    public var id: String = UIDevice.current.identifierForVendor!.uuidString
-
+    public var id: String
+    public var name: String
 }
 enum WordleState{
+    case loading
     case waiting
     case Prepare
     case Start
@@ -25,12 +26,14 @@ enum GameStatus{
     case win
     case lose
 }
-var battleNameToId: [String: String] = [:]
 
+var wordleAns = ""
+
+/// #NOTE: Local means these status are created/updated from local, they are states for the local user
 var wordleLocalGameStatus = GameStatus.inProgress
-var wordleLocalGuess: [String] = []
-var wordleLocalEvaluations: [JSON] = []
-var wordleLocalAns:String = ""
+var wordleLocalGuess: [JSON] = []
+var wordleLocalGuessForEvaluation: [String] = []
+var wordleLocalEvaluations: [[String]?] = [nil, nil, nil, nil, nil, nil]
 
 var bopomofoLocalGameStatus = GameStatus.inProgress
 var bopomofoLocalGuess: [JSON] = []
@@ -62,11 +65,15 @@ func timeSequence(mins: Int, secs: Int) -> (Int, Int){
     var secs = secs
     var mins = mins
     secs += 1
-    if secs > 59{
-        secs = 0
+    while secs > 59{
+        secs -= 59
         mins += 1
     }
     
     return (mins, secs)
 }
 
+struct Competitor {
+    var id: String
+    var name: String
+}

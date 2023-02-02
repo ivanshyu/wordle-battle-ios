@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F2BE2FBE2C78C475043C0EF /* Pods_alphacarbon_wordle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */; };
+		3382096E295C4FC200284D59 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3382096D295C4FC200284D59 /* LoginViewModel.swift */; };
 		3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57728A3AE9C00651FEE /* WebViewModel.swift */; };
 		3397B57C28A510BD00651FEE /* WorldleFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57B28A510BD00651FEE /* WorldleFieldView.swift */; };
 		3397B57E28A5FACC00651FEE /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57D28A5FACC00651FEE /* FieldModel.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		0A8267B5A7BDE77A6CBF7377 /* Pods-alphacarbon-wordle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.release.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.release.xcconfig"; sourceTree = "<group>"; };
 		2EF38F758A9A6B44AEC34DD0 /* Pods-alphacarbon-wordle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.debug.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.debug.xcconfig"; sourceTree = "<group>"; };
+		3382096D295C4FC200284D59 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3397B57728A3AE9C00651FEE /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		3397B57B28A510BD00651FEE /* WorldleFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldleFieldView.swift; sourceTree = "<group>"; };
 		3397B57D28A5FACC00651FEE /* FieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				339B7D7528A362AB0057A31E /* BopomofoBattleModel.swift */,
 				3397B57728A3AE9C00651FEE /* WebViewModel.swift */,
 				3397B57D28A5FACC00651FEE /* FieldModel.swift */,
+				3382096D295C4FC200284D59 /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -139,9 +142,9 @@
 		33BABA4A26C945F3003D3764 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				339B7D6F28A0C4210057A31E /* Battle.swift */,
 				33BABA5226C96043003D3764 /* Login.swift */,
 				339B7D6B289D14390057A31E /* Tabbar.swift */,
-				339B7D6F28A0C4210057A31E /* Battle.swift */,
 				3397B57F28A5FD8C00651FEE /* Square.swift */,
 			);
 			path = Models;
@@ -286,6 +289,7 @@
 			files = (
 				3397B58028A5FD8C00651FEE /* Square.swift in Sources */,
 				33BABA4F26C95C31003D3764 /* TextField.swift in Sources */,
+				3382096E295C4FC200284D59 /* LoginViewModel.swift in Sources */,
 				339B7D7428A111E80057A31E /* ActivityIndicator.swift in Sources */,
 				339B7D7628A362AB0057A31E /* BopomofoBattleModel.swift in Sources */,
 				3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */,
@@ -432,6 +436,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "alphacarbon-wordle/alphacarbon-wordle.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"alphacarbon-wordle/Preview Content\"";
@@ -443,9 +449,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -457,6 +464,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "alphacarbon-wordle/alphacarbon-wordle.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"alphacarbon-wordle/Preview Content\"";
@@ -468,9 +477,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
