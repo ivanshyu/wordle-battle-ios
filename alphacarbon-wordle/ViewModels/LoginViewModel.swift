@@ -50,7 +50,6 @@ class LoginViewModel: ObservableObject {
     }
     
     func login(appleId: String) {
-        
         AF.request("http://140.119.163.70:3030/users/apple_user?apple_id=\(appleId)").responseJSON{ response in
             switch response.result{
             case .success(let value):
@@ -67,6 +66,19 @@ class LoginViewModel: ObservableObject {
             case .failure(let error):
                 print(error)
                 break
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print("gFcmToken: ", gFcmToken)
+            AF.request("http://140.119.163.70:3030/users/update_fcm?apple_id=\(appleId)", method: .post, parameters: ["token": gFcmToken]).responseJSON{ response in
+                switch response.result{
+                case .success(_):
+                    print(response)
+                case .failure(let error):
+                    print(error)
+                    break
+                }
             }
         }
     }

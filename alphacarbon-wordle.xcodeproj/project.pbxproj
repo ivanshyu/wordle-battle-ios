@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F2BE2FBE2C78C475043C0EF /* Pods_alphacarbon_wordle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */; };
 		333A7E8F298B9F390072C3D1 /* GenericBattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333A7E8E298B9F390072C3D1 /* GenericBattleModel.swift */; };
+		333A7E91298BB5B10072C3D1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 333A7E90298BB5B10072C3D1 /* GoogleService-Info.plist */; };
 		3382096E295C4FC200284D59 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3382096D295C4FC200284D59 /* LoginViewModel.swift */; };
 		3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57728A3AE9C00651FEE /* WebViewModel.swift */; };
 		3397B57C28A510BD00651FEE /* WorldleFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57B28A510BD00651FEE /* WorldleFieldView.swift */; };
@@ -36,6 +37,7 @@
 		0A8267B5A7BDE77A6CBF7377 /* Pods-alphacarbon-wordle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.release.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.release.xcconfig"; sourceTree = "<group>"; };
 		2EF38F758A9A6B44AEC34DD0 /* Pods-alphacarbon-wordle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.debug.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.debug.xcconfig"; sourceTree = "<group>"; };
 		333A7E8E298B9F390072C3D1 /* GenericBattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBattleModel.swift; sourceTree = "<group>"; };
+		333A7E90298BB5B10072C3D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3382096D295C4FC200284D59 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3397B57728A3AE9C00651FEE /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		3397B57B28A510BD00651FEE /* WorldleFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldleFieldView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		33BABA3926C945AB003D3764 /* alphacarbon-wordle */ = {
 			isa = PBXGroup;
 			children = (
+				333A7E90298BB5B10072C3D1 /* GoogleService-Info.plist */,
 				33BABA4B26C945FD003D3764 /* Views */,
 				33BABA4A26C945F3003D3764 /* Models */,
 				33BABA4926C945E7003D3764 /* ViewModels */,
@@ -232,6 +235,7 @@
 			files = (
 				33BABA4226C945B2003D3764 /* Preview Assets.xcassets in Resources */,
 				33BABA3F26C945B2003D3764 /* Assets.xcassets in Resources */,
+				333A7E91298BB5B10072C3D1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,7 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"alphacarbon-wordle/Preview Content\"";
-				DEVELOPMENT_TEAM = A57RM36QLM;
+				DEVELOPMENT_TEAM = 386C2H7MKJ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "alphacarbon-wordle/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -446,7 +450,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui;
+				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui.ac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -465,7 +469,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"alphacarbon-wordle/Preview Content\"";
-				DEVELOPMENT_TEAM = A57RM36QLM;
+				DEVELOPMENT_TEAM = 386C2H7MKJ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "alphacarbon-wordle/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -474,7 +478,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui;
+				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui.ac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

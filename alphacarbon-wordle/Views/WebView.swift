@@ -83,7 +83,9 @@ struct WebView: UIViewRepresentable {
                             //correct
                             count = 0
                             for c in guessStr{
+                                //
                                 if (ansHold[c] ?? []).contains(count){
+                                    // filter out from answer dictionary to avoid double calculating
                                     ansHold[c] = ansHold[c]?.filter{$0 != count}
                                     isEvaluate[count] = EvaluateResult.correct
                                 }
@@ -96,9 +98,8 @@ struct WebView: UIViewRepresentable {
                             for c in guessStr{
                                 //present
                                 if isEvaluate[count] == EvaluateResult.none && (ansHold[c] ?? []).count > 0{
-                                    // pop one to prevent present repeatly
+                                    // pop one to avoid double calculating
                                     ansHold[c]?.popLast()
-                                    
                                     isEvaluate[count] = EvaluateResult.present
                                 }else if isEvaluate[count] == EvaluateResult.none{
                                     isEvaluate[count] = EvaluateResult.absent
@@ -167,6 +168,7 @@ struct WebView: UIViewRepresentable {
                             count = 0
                             for c in guessStr{
                                 if (ansHold[c] ?? []).contains(count){
+                                    ansHold[c] = ansHold[c]?.filter{$0 != count}
                                     isEvaluate[count] = EvaluateResult.correct
                                 }
                                 count+=1

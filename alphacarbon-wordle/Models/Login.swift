@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+var gFcmToken = ""
 class LoginInfo: ObservableObject{
     var account: String = ""
     var password: String = ""

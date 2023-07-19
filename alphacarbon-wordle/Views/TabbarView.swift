@@ -94,7 +94,6 @@ struct WordleView: View {
                     battle.connect()
                 }.buttonStyle(MainButton())
                     .padding()
-                    .padding(.vertical , between.height)
             } else if battle.state == WordleState.Prepare {
                 Spacer()
                 
@@ -112,7 +111,6 @@ struct WordleView: View {
                     }
                 }.buttonStyle(MainButton())
                     .padding()
-                    .padding(.vertical , between.height)
             } else if battle.state == WordleState.Start{
                 HStack{
                     
@@ -213,7 +211,10 @@ struct WordleView: View {
                 Spacer()
                 
             }
-            
+            Text("版本 " + appVersion)
+                .foregroundColor(labelColor)
+                .font(.footnote)
+            Spacer().frame(width: fullScreenSize.width, height: gutter.height, alignment: .center)
         }//.frame(maxWidth: .infinity, maxHeight: fullViewSize.height)
         .background(primaryColor)
         .edgesIgnoringSafeArea(.top)
@@ -312,7 +313,6 @@ struct BopomofoView: View {
                     battle.connect()
                 }.buttonStyle(MainButton())
                     .padding()
-                    .padding(.vertical , between.height)
             } else if battle.state == WordleState.Prepare {
                 Spacer()
 
@@ -330,7 +330,6 @@ struct BopomofoView: View {
                     }
                 }.buttonStyle(MainButton())
                     .padding()
-                    .padding(.vertical , between.height)
             } else if battle.state == WordleState.Start{
                 HStack{
                     
@@ -431,7 +430,10 @@ struct BopomofoView: View {
                 Spacer()
                 
             }
-            
+            Text("版本 " + appVersion)
+                .foregroundColor(labelColor)
+                .font(.footnote)
+            Spacer().frame(width: fullScreenSize.width, height: gutter.height, alignment: .center)
         }//.frame(maxWidth: .infinity, maxHeight: fullViewSize.height)
         .background(primaryColor)
         .edgesIgnoringSafeArea(.top)
