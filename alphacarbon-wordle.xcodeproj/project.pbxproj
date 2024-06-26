@@ -54,6 +54,7 @@
 		2EF38F758A9A6B44AEC34DD0 /* Pods-alphacarbon-wordle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.debug.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.debug.xcconfig"; sourceTree = "<group>"; };
 		333A7E8E298B9F390072C3D1 /* GenericBattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBattleModel.swift; sourceTree = "<group>"; };
 		3382096D295C4FC200284D59 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		338D43412C2C529F00F0CB51 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		339767C72A6790BD00473CB6 /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		3397B57728A3AE9C00651FEE /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		3397B57B28A510BD00651FEE /* WorldleFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldleFieldView.swift; sourceTree = "<group>"; };
@@ -119,6 +120,7 @@
 		33BABA2E26C945AB003D3764 = {
 			isa = PBXGroup;
 			children = (
+				338D43412C2C529F00F0CB51 /* .gitignore */,
 				33FEFD9B2C2C1ECD00EFCE0C /* README.md */,
 				33F3B0022ADE837500696629 /* AC-Bridging-Header.h */,
 				33BABA3926C945AB003D3764 /* alphacarbon-wordle */,
