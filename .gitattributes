@@ -1,0 +1,2 @@
+CryptoEth.xcframework/ios-arm64/libcrypto_eth-ios.a filter=lfs diff=lfs merge=lfs -text
+CryptoEth.xcframework/ios-arm64_x86_64-simulator/libcrypto_eth-ios-sim.a filter=lfs diff=lfs merge=lfs -text
