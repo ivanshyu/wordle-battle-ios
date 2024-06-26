@@ -1,4 +1,0 @@
-module CryptoEth {
-  header "crypto-eth.h"
-  export *
-}
