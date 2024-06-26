@@ -35,3 +35,16 @@ struct SecondaryButton: ButtonStyle {
             .animation(.easeOut(duration: 0.3), value: configuration.isPressed)
     }
 }
+
+struct ReconnectButton: ButtonStyle {
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: fullScreenSize.width, height: 25, alignment: .center)
+            .background(Color(UIColor(red:84/255, green:138/255, blue:171/255, alpha:1)))
+            .foregroundColor(.white)
+            .font(.headline.bold())
+            .scaleEffect(configuration.isPressed ? 0.85 : 1)
+            .animation(.easeOut(duration: 0.3), value: configuration.isPressed)
+    }
+}

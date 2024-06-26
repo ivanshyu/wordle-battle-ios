@@ -9,6 +9,8 @@
 		<string>Default</string>
 	</array>
 	<key>keychain-access-groups</key>
-	<array/>
+	<array>
+		<string>$(AppIdentifierPrefix)cs.nccu</string>
+	</array>
 </dict>
 </plist>

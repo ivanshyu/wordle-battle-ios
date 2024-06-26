@@ -86,7 +86,7 @@ struct LoginView: View {
                     //                .padding()
                     
                     
-                    //                HStack {
+                    //                H1Stack {
                     //                    Text("尚未註冊帳戶嗎？")
                     //                        .foregroundColor(labelColor)
                     //                    Button("立即註冊"){

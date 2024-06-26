@@ -39,18 +39,18 @@ struct WebView: UIViewRepresentable {
 //            }
             self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){_ in
                 if self.parent.url == URL(string: wordle.link){
-                    let script = "localStorage.getItem(\"nyt-wordle-moogle/ANON\")"
+                    let script = "localStorage.getItem(\"games-state-wordleV2/ANON\")"
                     webView.evaluateJavaScript(script) { (data, error) in
                         if let error = error {
-                            print ("localStorage.getitem('nyt-wordle-moogle/ANON') failed due to \(error)")
+                            print ("localStorage.getitem('games-state-wordleV2/ANON') failed due to \(error)")
                             assertionFailure()
                             return
                         }
                         let encodedString = JSON(data as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
                         
-                        let jsonData = JSON(encodedString)
+                        let jsonData = JSON(encodedString)["states"][0]
 
-                        wordleLocalGuess = jsonData["game"]["boardState"].arrayValue//.map({$0.stringValue})
+                        wordleLocalGuess = jsonData["data"]["boardState"].arrayValue//.map({$0.stringValue})
                         
                         //record each char's index of solution
                         //eg. "tonic" => ["t": [0], "o": [1], .....]
@@ -112,12 +112,12 @@ struct WebView: UIViewRepresentable {
                         }
                         
                         //gameStatus
-                        if jsonData["game"]["status"].description == "WIN"{
+                        if jsonData["data"]["status"].description == "WIN"{
                             print("win")
                             wordleLocalGameStatus = GameStatus.win
                             self.timer!.invalidate()
                             print("webview: ", self.parent)
-                        } else if jsonData["game"]["status"].description == "FAIL"{
+                        } else if jsonData["data"]["status"].description == "FAIL"{
                             print("lose")
                             wordleLocalGameStatus = GameStatus.lose
                             self.timer!.invalidate()

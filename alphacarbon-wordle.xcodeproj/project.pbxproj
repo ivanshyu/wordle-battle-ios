@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2F2BE2FBE2C78C475043C0EF /* Pods_alphacarbon_wordle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */; };
 		333A7E8F298B9F390072C3D1 /* GenericBattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333A7E8E298B9F390072C3D1 /* GenericBattleModel.swift */; };
-		333A7E91298BB5B10072C3D1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 333A7E90298BB5B10072C3D1 /* GoogleService-Info.plist */; };
 		3382096E295C4FC200284D59 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3382096D295C4FC200284D59 /* LoginViewModel.swift */; };
+		339767C82A6790BD00473CB6 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339767C72A6790BD00473CB6 /* HttpRequest.swift */; };
 		3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57728A3AE9C00651FEE /* WebViewModel.swift */; };
 		3397B57C28A510BD00651FEE /* WorldleFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57B28A510BD00651FEE /* WorldleFieldView.swift */; };
 		3397B57E28A5FACC00651FEE /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397B57D28A5FACC00651FEE /* FieldModel.swift */; };
@@ -31,14 +31,30 @@
 		33BABA5526C9756B003D3764 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA5426C9756A003D3764 /* MainButton.swift */; };
 		33BABA5726CA438E003D3764 /* RegisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA5626CA438E003D3764 /* RegisView.swift */; };
 		33BABA5B26CA692B003D3764 /* RegisChangeCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BABA5A26CA692B003D3764 /* RegisChangeCodeView.swift */; };
+		33F3B0182ADFBBEC00696629 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3B0172ADFBBEC00696629 /* Crypto.swift */; };
+		33F3B0712AE2941000696629 /* CryptoEth.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F3B0702AE2941000696629 /* CryptoEth.xcframework */; };
+		33F883E32A84E677005ABDA5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F883E22A84E677005ABDA5 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		33F3AFFE2ADE784400696629 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A8267B5A7BDE77A6CBF7377 /* Pods-alphacarbon-wordle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.release.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.release.xcconfig"; sourceTree = "<group>"; };
 		2EF38F758A9A6B44AEC34DD0 /* Pods-alphacarbon-wordle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-alphacarbon-wordle.debug.xcconfig"; path = "Target Support Files/Pods-alphacarbon-wordle/Pods-alphacarbon-wordle.debug.xcconfig"; sourceTree = "<group>"; };
 		333A7E8E298B9F390072C3D1 /* GenericBattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBattleModel.swift; sourceTree = "<group>"; };
-		333A7E90298BB5B10072C3D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3382096D295C4FC200284D59 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		339767C72A6790BD00473CB6 /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		3397B57728A3AE9C00651FEE /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		3397B57B28A510BD00651FEE /* WorldleFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldleFieldView.swift; sourceTree = "<group>"; };
 		3397B57D28A5FACC00651FEE /* FieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
@@ -61,6 +77,12 @@
 		33BABA5426C9756A003D3764 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		33BABA5626CA438E003D3764 /* RegisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisView.swift; sourceTree = "<group>"; };
 		33BABA5A26CA692B003D3764 /* RegisChangeCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisChangeCodeView.swift; sourceTree = "<group>"; };
+		33F3B0022ADE837500696629 /* AC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AC-Bridging-Header.h"; path = "alphacarbon-wordle/AC-Bridging-Header.h"; sourceTree = "<group>"; };
+		33F3B0172ADFBBEC00696629 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		33F3B06F2AE2940C00696629 /* crypto-eth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "crypto-eth.h"; sourceTree = "<group>"; };
+		33F3B0702AE2941000696629 /* CryptoEth.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = CryptoEth.xcframework; sourceTree = "<group>"; };
+		33F883E22A84E677005ABDA5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		33FEFD9B2C2C1ECD00EFCE0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_alphacarbon_wordle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -69,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33F3B0712AE2941000696629 /* CryptoEth.xcframework in Frameworks */,
 				2F2BE2FBE2C78C475043C0EF /* Pods_alphacarbon_wordle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,9 +108,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		339767C62A6790AD00473CB6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				339767C72A6790BD00473CB6 /* HttpRequest.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		33BABA2E26C945AB003D3764 = {
 			isa = PBXGroup;
 			children = (
+				33FEFD9B2C2C1ECD00EFCE0C /* README.md */,
+				33F3B0022ADE837500696629 /* AC-Bridging-Header.h */,
 				33BABA3926C945AB003D3764 /* alphacarbon-wordle */,
 				33BABA3826C945AB003D3764 /* Products */,
 				0627C238373086A3B0862A2B /* Pods */,
@@ -106,7 +139,7 @@
 		33BABA3926C945AB003D3764 /* alphacarbon-wordle */ = {
 			isa = PBXGroup;
 			children = (
-				333A7E90298BB5B10072C3D1 /* GoogleService-Info.plist */,
+				33F883E22A84E677005ABDA5 /* GoogleService-Info.plist */,
 				33BABA4B26C945FD003D3764 /* Views */,
 				33BABA4A26C945F3003D3764 /* Models */,
 				33BABA4926C945E7003D3764 /* ViewModels */,
@@ -129,6 +162,7 @@
 		33BABA4926C945E7003D3764 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				339767C62A6790AD00473CB6 /* Utils */,
 				33BABA4C26C94795003D3764 /* ColorModel.swift */,
 				33BABA5026C95DEB003D3764 /* DeviceConfigModel.swift */,
 				3397B57728A3AE9C00651FEE /* WebViewModel.swift */,
@@ -146,6 +180,7 @@
 				33BABA5226C96043003D3764 /* Login.swift */,
 				339B7D6B289D14390057A31E /* Tabbar.swift */,
 				3397B57F28A5FD8C00651FEE /* Square.swift */,
+				33F3B0172ADFBBEC00696629 /* Crypto.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -169,6 +204,8 @@
 		86F47DEC7B3559061C82F3FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33F3B06F2AE2940C00696629 /* crypto-eth.h */,
+				33F3B0702AE2941000696629 /* CryptoEth.xcframework */,
 				B7FC7908F0F09AAB22F24998 /* Pods_alphacarbon_wordle.framework */,
 			);
 			name = Frameworks;
@@ -186,6 +223,7 @@
 				33BABA3426C945AB003D3764 /* Frameworks */,
 				33BABA3526C945AB003D3764 /* Resources */,
 				2BE4558B313D08E45A3580EE /* [CP] Embed Pods Frameworks */,
+				33F3AFFE2ADE784400696629 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -235,7 +273,7 @@
 			files = (
 				33BABA4226C945B2003D3764 /* Preview Assets.xcassets in Resources */,
 				33BABA3F26C945B2003D3764 /* Assets.xcassets in Resources */,
-				333A7E91298BB5B10072C3D1 /* GoogleService-Info.plist in Resources */,
+				33F883E32A84E677005ABDA5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +331,10 @@
 				33BABA4F26C95C31003D3764 /* TextField.swift in Sources */,
 				3382096E295C4FC200284D59 /* LoginViewModel.swift in Sources */,
 				339B7D7428A111E80057A31E /* ActivityIndicator.swift in Sources */,
+				339767C82A6790BD00473CB6 /* HttpRequest.swift in Sources */,
 				3397B57828A3AE9C00651FEE /* WebViewModel.swift in Sources */,
 				339B7D7028A0C4210057A31E /* Battle.swift in Sources */,
+				33F3B0182ADFBBEC00696629 /* Crypto.swift in Sources */,
 				33BABA5126C95DEB003D3764 /* DeviceConfigModel.swift in Sources */,
 				33BABA5526C9756B003D3764 /* MainButton.swift in Sources */,
 				339B7D6C289D14390057A31E /* Tabbar.swift in Sources */,
@@ -441,7 +481,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"alphacarbon-wordle/Preview Content\"";
-				DEVELOPMENT_TEAM = 386C2H7MKJ;
+				DEVELOPMENT_TEAM = QD35XVDQ36;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "alphacarbon-wordle/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -450,9 +490,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui.ac;
+				PRODUCT_BUNDLE_IDENTIFIER = sixdots.eam.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "alphacarbon-wordle/AC-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -469,7 +510,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"alphacarbon-wordle/Preview Content\"";
-				DEVELOPMENT_TEAM = 386C2H7MKJ;
+				DEVELOPMENT_TEAM = QD35XVDQ36;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "alphacarbon-wordle/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -478,9 +519,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = wordle.swiftui.ac;
+				PRODUCT_BUNDLE_IDENTIFIER = sixdots.eam.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "alphacarbon-wordle/AC-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

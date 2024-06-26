@@ -52,7 +52,7 @@ class GenericBattleModel: ObservableObject{
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
         
-        manager = SocketManager(socketURL: URL(string: "http://140.119.163.70:3030")!, config: [.log(false), .compress])
+        manager = SocketManager(socketURL: URL(string: serverUrl)!, config: [.log(false), .compress])
         socket = manager.defaultSocket
         socket.connect()
         
