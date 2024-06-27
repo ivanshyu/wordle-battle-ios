@@ -34,12 +34,35 @@ struct WebView: UIViewRepresentable {
         // Delegate methods go here
         //get data from local storage, and then parse it to desired structure
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            let script = "localStorage.getItem(\"games-state-wordleV2/ANON\")"
+
+            webView.evaluateJavaScript(script) { (data, _) in
+                let encodedString = JSON(data as Any).description.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
+                
+                if let timeResult = JSON(encodedString)["states"][0]["timestamp"].double{
+                    // check if result is today
+                    // if not equal, clean the localstorage
+                    let date = Date(timeIntervalSince1970: timeResult)
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    let wordleDateString = formatter.string(from: date)
+                    let todayString = formatter.string(from: Date())
+                    print(wordleDateString, todayString)
+                    if wordleDateString != todayString{
+                        print("date not eq")
+                        webView.evaluateJavaScript("localStorage.setItem('games-state-wordleV2/ANON', null)") { (result, error) in
+                            webView.reload()
+                        }
+                    }
+                }
+                    
+                }
+            
 //            if self.timer == nil {
 //                return
 //            }
             self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){_ in
                 if self.parent.url == URL(string: wordle.link){
-                    let script = "localStorage.getItem(\"games-state-wordleV2/ANON\")"
                     webView.evaluateJavaScript(script) { (data, error) in
                         if let error = error {
                             print ("localStorage.getitem('games-state-wordleV2/ANON') failed due to \(error)")
